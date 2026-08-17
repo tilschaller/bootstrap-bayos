@@ -1,7 +1,7 @@
-bayos-kernel
-limine
-gcc
-binutils
-mlibc
-init
-.xbstrap
+./bayos-kernel/
+./limine/
+./gcc/
+./binutils/
+./mlibc/
+./init/
+./.xbstrap/
