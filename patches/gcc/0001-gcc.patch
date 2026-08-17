@@ -4,9 +4,7 @@ Date: Mon, 17 Aug 2026 13:20:14 +0200
 Subject: [PATCH] added support for bayos
 
 ---
- checkedout.xbstrap          |    0
  config.sub                  |    2 +-
- fetched.xbstrap             |    0
  fixincludes/mkfixinc.sh     |    2 +
  gcc/config.gcc              |   14 +
  gcc/config/bayos.h          |   29 +
@@ -14,13 +12,8 @@ Subject: [PATCH] added support for bayos
  libstdc++-v3/configure      | 3218 +++++++++++++++++++++++++++++++++++
  libstdc++-v3/crossconfig.m4 |    7 +
  9 files changed, 3279 insertions(+), 1 deletion(-)
- create mode 100644 checkedout.xbstrap
- create mode 100644 fetched.xbstrap
  create mode 100644 gcc/config/bayos.h
 
-diff --git a/checkedout.xbstrap b/checkedout.xbstrap
-new file mode 100644
-index 00000000000..e69de29bb2d
 diff --git a/config.sub b/config.sub
 index 38f3d037a78..c026f9e5f77 100755
 --- a/config.sub
@@ -34,9 +27,6 @@ index 38f3d037a78..c026f9e5f77 100755
  	     | *vms* | esix* | aix* | cnk* | sunos | sunos[34]* \
  	     | hpux* | unos* | osf* | luna* | dgux* | auroraux* | solaris* \
  	     | sym* |  plan9* | psp* | sim* | xray* | os68k* | v88r* \
-diff --git a/fetched.xbstrap b/fetched.xbstrap
-new file mode 100644
-index 00000000000..e69de29bb2d
 diff --git a/fixincludes/mkfixinc.sh b/fixincludes/mkfixinc.sh
 index 7112f4dcd64..d5c0cc38729 100755
 --- a/fixincludes/mkfixinc.sh
