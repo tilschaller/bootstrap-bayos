@@ -1,0 +1,11 @@
+[host_machine]
+system = 'bayos'
+cpu_family = 'x86_64'
+cpu = 'x86_64'
+endian = 'little'
+[binaries]
+c = 'x86_64-bayos-gcc'
+cpp = 'x86_64-bayos-g++'
+ar = 'x86_64-bayos-ar'
+strip = 'x86_64-bayos-strip'
+ld = 'x86_64-bayos-ld'

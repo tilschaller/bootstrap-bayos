@@ -23,6 +23,7 @@ sources:
     git: 'https://github.com/managarm/mlibc'
     branch: 'v6.x'
     rolling_version: true
+  - name: bayos-init
 
 tools:
   - name: host-limine
@@ -139,15 +140,35 @@ packages:
       - args: ['ninja', 'install']
         environ:
           DESTDIR: '@THIS_COLLECT_DIR@'
+  - name: bayos-init
+    from_source: bayos-init
+    tools_required:
+      - gcc
+      - binutils
+    configure:
+      - args:
+        - 'meson'
+        - 'setup'
+        - '--cross-file'
+        - '@THIS_SOURCE_DIR@/x86_64-bayos.txt'
+        - '--prefix=/usr'
+        - '@THIS_SOURCE_DIR@'
+    build:
+      - args: ['ninja']
+    install:
+      - args: ['ninja', 'install']
+        environ:
+          DESTDIR: '@SYSROOT_DIR@'
 
 tasks:
   - name: initramfs
     args: ['mkdir', '-p', '@BUILD_ROOT@/iso/boot']
-    args: ['tar', '-cf', '@BUILD_ROOT@/iso/boot/initramfs.tar', '@SYSROOT_DIR@']
+    args: ['tar', '-cf', '@BUILD_ROOT@/iso/boot/initramfs.tar', '-C', '@SYSROOT_DIR@', '.', '--transform=s,/./,/,S']
     pkgs_required:
       - bayos-kernel
       - limine
       - mlibc
+      - bayos-init
   - name: iso
     pkgs_required:
       - bayos-kernel
