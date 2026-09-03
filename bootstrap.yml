@@ -155,7 +155,6 @@ packages:
         - '@THIS_SOURCE_DIR@'
     build:
       - args: ['ninja']
-    install:
       - args: ['ninja', 'install']
         environ:
           DESTDIR: '@SYSROOT_DIR@'
