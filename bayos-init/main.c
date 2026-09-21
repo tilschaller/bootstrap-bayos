@@ -13,9 +13,10 @@ int main(void) {
 
 	pid_t p = fork();
 	if (p == 0) {
-		printf("Hello from child process!\n");
+		printf("Child process is calculating pi:\n");
+		execve("/usr/bin/pi", NULL, NULL);
 	} else {
-		printf("Hello from parent process!\n");
+		printf("This is the parent process!\n");
 	}
 
 	return 0;

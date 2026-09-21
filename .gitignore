@@ -5,3 +5,5 @@ binutils/
 mlibc/
 init/
 .xbstrap/
+!patches/mlibc
+!patches
