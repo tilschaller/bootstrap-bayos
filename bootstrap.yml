@@ -145,6 +145,8 @@ packages:
     tools_required:
       - gcc
       - binutils
+    depends:
+      - mlibc
     configure:
       - args:
         - 'meson'
