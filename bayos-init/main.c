@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 int main(void) {
 	setvbuf(stdout, NULL, _IONBF, 0);
@@ -11,13 +12,15 @@ int main(void) {
 	}
 	putchar('\n');
 
-	pid_t p = fork();
-	if (p == 0) {
+	pid_t pid = fork();
+	if (pid == 0) {
 		printf("Child process is calculating pi:\n");
 		execve("/usr/bin/pi", NULL, NULL);
-	} else {
-		printf("This is the parent process!\n");
 	}
+
+	int res;
+	pid = waitpid(pid, &res, 0);
+	printf("This is the parent process! Child terminated!\n");
 
 	return 0;
 }

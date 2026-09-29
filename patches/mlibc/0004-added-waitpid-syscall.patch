@@ -1,0 +1,54 @@
+From fe45d7b2ddadb07941517dcaa44eb5f9c811aa7b Mon Sep 17 00:00:00 2001
+From: Til Schaller <schaller.til@gmail.com>
+Date: Tue, 29 Sep 2026 11:20:54 +0200
+Subject: [PATCH 4/4] added waitpid syscall
+
+---
+ sysdeps/bayos/sysdeps.cpp | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/sysdeps/bayos/sysdeps.cpp b/sysdeps/bayos/sysdeps.cpp
+index 74340d71..e3e4d1a6 100644
+--- a/sysdeps/bayos/sysdeps.cpp
++++ b/sysdeps/bayos/sysdeps.cpp
+@@ -18,6 +18,7 @@
+ #define SYS_EXIT 3
+ #define SYS_FORK 4
+ #define SYS_EXECVE 5
++#define SYS_WAITPID 6
+ 
+ namespace mlibc {
+ 
+@@ -46,6 +47,7 @@ namespace mlibc {
+ 
+     [[noreturn]] void sys_exit(int) {
+         syscall(SYS_EXIT);
++        __builtin_unreachable();
+     }
+ 
+     int sys_close(int) {
+@@ -91,6 +93,20 @@ namespace mlibc {
+     }
+ 
+     int sys_execve(const char *path, char *const argv[], char *const envp[]) {
+-        return syscall(SYS_EXECVE, path, argv, envp);
++        syscall(SYS_EXECVE, path, argv, envp);
++        return 0;
++    }
++
++    int sys_waitpid(pid_t pid, int *status, int flags,
++                struct rusage *siginfo, pid_t *ret_pid) {
++        (void)siginfo;
++
++        int result = syscall(SYS_WAITPID, pid, status, flags);
++
++        if (result < 0)
++            return -result;
++
++        *ret_pid = static_cast<pid_t>(result);
++        return 0;
+     }
+ }
+-- 
+2.55.0
+
