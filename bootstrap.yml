@@ -145,7 +145,7 @@ packages:
     tools_required:
       - gcc
       - binutils
-    depends:
+    pkgs_required:
       - mlibc
     configure:
       - args:
