@@ -197,3 +197,14 @@ tasks:
         - 'q35'
         - '-debugcon'
         - 'stdio'
+  - name: bochs
+    tasks_required:
+      - iso
+    args:
+        - 'bochs'
+        - '-q'
+        - 'megs: 4096'
+        - 'ata0-master: type=cdrom, path="@BUILD_ROOT@/bayos.iso", status=inserted'
+        - 'boot: cdrom'
+        - 'port_e9_hack: enabled=1'
+        - 'log: bochs.log'
